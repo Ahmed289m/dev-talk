@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/app/_lib/axios-instance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios"
 
 // Async Thunks for Login
 export const login = createAsyncThunk(
