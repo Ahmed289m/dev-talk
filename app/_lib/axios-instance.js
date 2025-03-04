@@ -16,7 +16,7 @@ const setToken = (token) => {
 };
 
 export const axiosInstance = axios.create({
-  baseURL: "https://dev-talk.azurewebsites.net/api",
+  baseURL: "https://devtalk.runasp.net/api",
   headers: {
     "Content-Type": "application/json",
     Authorization: getToken() ? `Bearer ${getToken()}` : "",

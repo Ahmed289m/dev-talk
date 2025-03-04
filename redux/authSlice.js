@@ -1,15 +1,13 @@
 import { axiosInstance } from "@/app/_lib/axios-instance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios"
 
 // Async Thunks for Login
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/Auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(`https://devtalk.runasp.net/api/auth/login`, { email, password }, { withCredentials: true });
 
       if (!response.data || !response.data.result) {
         throw new Error("Invalid response from server");
