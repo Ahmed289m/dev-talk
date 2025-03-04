@@ -4,7 +4,7 @@ import { Badge } from "../_components/badge";
 import { getPosts } from "../_lib/data-services";
 
 export default async function PostsPage() {
-  const posts = await getPosts();
+  const posts = [];
   return (
     <div className="min-h-screen bg-white">
       <div className="flex">
