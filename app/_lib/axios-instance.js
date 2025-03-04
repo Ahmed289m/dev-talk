@@ -16,7 +16,7 @@ export const axiosInstance = axios.create({
   baseURL: "https://dev-talk.azurewebsites.net/api",
   headers: {
     "Content-Type": "application/json",
-    Authorization: getToken() ? `Bearer ${getToken()}` : "",
+    Authorization: getToken() ? `${getToken()}` : "",
   },
   withCredentials: true, // Required for refreshToken API (uses cookies)
 });
@@ -39,20 +39,18 @@ axiosInstance.interceptors.request.use(async (req) => {
     // If token is expired, call refreshToken API
     const response = await axios.post(
       "https://dev-talk.azurewebsites.net/api/Auth/refreshToken",
-      {}, // No need to send anything in the body
-      { withCredentials: true } // Ensure cookies are sent
+      {},
+      { withCredentials: true }
     );
 
-    const newToken = response.data.token; // Extract new token
+    const newToken = response.data.token;
 
-    // Store new token correctly
     localStorage.setItem("token", newToken);
 
-    // Update request with new token
-    req.headers.Authorization = `Bearer ${newToken}`;
+    req.headers.Authorization = `${newToken}`;
     return req;
   } catch (error) {
     console.error("Token refresh failed:", error);
-    return req; // Continue without modifying request if refresh fails
+    return req;
   }
 });
