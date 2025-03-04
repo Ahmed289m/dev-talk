@@ -7,10 +7,16 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/Auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://dev-talk.azurewebsites.net/api/Auth/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (!response.data || !response.data.result) {
         throw new Error("Invalid response from server");
