@@ -1,0 +1,30 @@
+import { Roboto } from "next/font/google";
+
+import "./globals.css";
+import Navbar from "./_components/navbar";
+
+import ReduxProvider from "./_components/redux-provider";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
+});
+
+export const metadata = {
+  title: "StackLoop",
+  description: "Software Developers Hub",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className={roboto.variable}>
+        <ReduxProvider>
+          <Navbar />
+          {children}
+        </ReduxProvider>
+      </body>
+    </html>
+  );
+}
