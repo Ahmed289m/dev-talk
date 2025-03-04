@@ -1,22 +1,15 @@
 import { axiosInstance } from "@/app/_lib/axios-instance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 // Async Thunks for Login
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "https://dev-talk.azurewebsites.net/api/Auth/login",
-        {
-          email,
-          password,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await axiosInstance.post("/Auth/login", {
+        email,
+        password,
+      });
 
       if (!response.data || !response.data.result) {
         throw new Error("Invalid response from server");
