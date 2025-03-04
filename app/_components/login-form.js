@@ -7,11 +7,13 @@ import Swal from "sweetalert2";
 import * as Yup from "yup";
 
 import { useRouter } from "next/navigation";
+import { useToken } from "../_contexts/useToken";
 
 function LoginForm() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.auth);
   const router = useRouter();
+  const { setToken } = useToken();
 
   return (
     <Formik
@@ -35,7 +37,8 @@ function LoginForm() {
               icon: "success",
               confirmButtonText: "OK",
             });
-            document.cookie = `token=${data.token}`;
+            localStorage.setItem("token", data.token);
+            setToken(true);
             router.push("/posts");
           })
           .catch((error) => {

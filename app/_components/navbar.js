@@ -1,24 +1,24 @@
 "use client";
 import Link from "next/link";
 import { Search, Bell, LogOut } from "lucide-react";
-import { logout, refreshToken } from "@/redux/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/authSlice";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useToken } from "../_contexts/useToken";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  const { token, expTime } = useSelector((state) => state.auth);
   const router = useRouter();
+  const { token, setToken } = useToken();
 
-  {
-    /*const expDay = expTime.split("T")[0].split("-")[2];
-  const currentDate = new Date();
-  const currendDay = currentDate.toString().split(" ")[2];
-  if (expDay <= currendDay) dispatch(refreshToken());*/
-  }
-
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(localStorage.getItem("token") ? true : false);
+    }
+  }, [setToken]);
   const handleLogout = () => {
     dispatch(logout());
 
@@ -28,6 +28,8 @@ export default function Navbar() {
       icon: "success",
       confirmButtonText: "OK",
     });
+    localStorage.removeItem("token");
+    setToken(null);
     router.push("/login");
   };
 

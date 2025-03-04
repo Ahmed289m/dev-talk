@@ -1,3 +1,4 @@
+import { axiosInstance } from "@/app/_lib/axios-instance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -6,18 +7,21 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "https://dev-talk.azurewebsites.net/api/Auth/login",
+      const response = await axiosInstance.post("/Auth/login", {
+        email,
+        password,
+      });
 
-        { email, password },
+      if (!response.data || !response.data.result) {
+        throw new Error("Invalid response from server");
+      }
 
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+      const { token } = response.data.result;
+      localStorage.setItem("token", token); // Save token correctly
+
       return response.data.result;
     } catch (error) {
+      console.error("Login error:", error.response?.data || error);
       return rejectWithValue(
         error.response?.data?.errors || "Something went wrong"
       );
@@ -33,11 +37,13 @@ export const register = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post(
-        "https://dev-talk.azurewebsites.net/api/Auth/register",
-        { firstName, lastName, userName, email, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
+      const response = await axiosInstance.post("/Auth/register", {
+        firstName,
+        lastName,
+        userName,
+        email,
+        password,
+      });
       return response.data.result;
     } catch (error) {
       return rejectWithValue(
@@ -46,22 +52,6 @@ export const register = createAsyncThunk(
     }
   }
 );
-
-//refresh token https://dev-talk.azurewebsites.net/api/Auth/refreshToken
-
-export const refreshToken = createAsyncThunk("auth/refreshToken", async () => {
-  try {
-    const response = await axios.post(
-      "https://dev-talk.azurewebsites.net/api/Auth/refreshToken",
-      { headers: { accept: `text/plain` } }
-    );
-    return response.data;
-  } catch (error) {
-    return rejectWithValue(
-      error.response?.data?.errors || "Something went wrong"
-    );
-  }
-});
 
 //create auth slice
 const authSlice = createSlice({
@@ -111,10 +101,6 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
-      .addCase(refreshToken.fulfilled, (state, action) => {
-        state.token = action.payload.token;
-        state.expTime = action.payload.refreshTokenExpiration;
       });
   },
 });
