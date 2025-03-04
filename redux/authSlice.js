@@ -7,7 +7,7 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`https://dev-talk.azurewebsites.net/api/auth/login`, { email, password }, { withCredentials: true });
+      const response = await axios.post(`https://devtalk.runasp.net/api/auth/login`, { email, password }, { withCredentials: true });
 
       if (!response.data || !response.data.result) {
         throw new Error("Invalid response from server");
