@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LoginForm from "../_components/login-form";
 
 export default function Login() {

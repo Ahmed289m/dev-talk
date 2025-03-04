@@ -1,8 +1,6 @@
 "use client";
 
 import axios from "axios";
-import dayjs from "dayjs";
-import { jwtDecode } from "jwt-decode";
 
 const getToken = () => {
   if (typeof window !== "undefined") {

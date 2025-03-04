@@ -60,7 +60,6 @@ const authSlice = createSlice({
     token: null,
     loading: false,
     error: null,
-    expTime: null,
   },
   reducers: {
     logout: (state) => {
@@ -83,7 +82,6 @@ const authSlice = createSlice({
           roles: action.payload.roles,
         };
         state.token = action.payload.token;
-        state.expTime = action.payload.refreshTokenExpiration;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
