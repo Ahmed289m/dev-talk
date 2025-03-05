@@ -1,12 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../_components/avatar";
 import { Badge } from "../_components/badge";
-
 import { getPosts } from "../_lib/data-services";
+import Link from "next/link";
+import { Pencil } from "lucide-react";
 
 export default async function PostsPage() {
-  const posts = [];
+  const posts = await getPosts();
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative">
       <div className="flex">
         <main className="flex-1">
           <div className="p-6">
@@ -68,6 +70,13 @@ export default async function PostsPage() {
           </div>
         </main>
       </div>
+
+      <Link
+        href="/write-post"
+        className="fixed bottom-6 right-6 bg-green-500 text-white rounded-full w-13 h-13 flex items-center justify-center shadow-lg hover:bg-green-600"
+      >
+        <Pencil className="w-5 h-5" />
+      </Link>
     </div>
   );
 }

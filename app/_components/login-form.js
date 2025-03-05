@@ -14,7 +14,6 @@ function LoginForm() {
   const { loading } = useSelector((state) => state.auth);
   const router = useRouter();
   const { setToken } = useToken();
-
   return (
     <Formik
       initialValues={{
@@ -37,7 +36,6 @@ function LoginForm() {
               icon: "success",
               confirmButtonText: "OK",
             });
-            localStorage.setItem("token", data.token);
             setToken(true);
             router.push("/posts");
           })

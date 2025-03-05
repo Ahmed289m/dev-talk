@@ -6,11 +6,10 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post(
-        `Auth/login`,
-        { email, password },
-        { withCredentials: true }
-      );
+      const response = await axiosInstance.post(`Auth/login`, {
+        email,
+        password,
+      });
 
       if (!response.data || !response.data.result) {
         throw new Error("Invalid response from server");
