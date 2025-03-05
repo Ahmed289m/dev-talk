@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "./_components/navbar";
 
 import ReduxProvider from "./_components/redux-provider";
-import TokenProvider from "./_contexts/useToken";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -22,10 +21,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={roboto.variable}>
         <ReduxProvider>
-          <TokenProvider>
-            <Navbar />
-            {children}
-          </TokenProvider>
+          <Navbar />
+          {children}
         </ReduxProvider>
       </body>
     </html>

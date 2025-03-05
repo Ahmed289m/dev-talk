@@ -1,36 +1,24 @@
 "use client";
 import Link from "next/link";
 import { Search, Bell, LogOut } from "lucide-react";
-import { logout } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
 
 import { useRouter } from "next/navigation";
+import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
-import { useToken } from "../_contexts/useToken";
+import { removeToken } from "../_lib/cookies";
 
 export default function Navbar() {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const { token, setToken } = useToken();
+  const [{ token: cookieToken }] = useCookies(["token"]);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setToken(localStorage.getItem("token") ? true : false);
-    }
-  }, [setToken]);
-  const handleLogout = () => {
-    dispatch(logout());
+    setToken(cookieToken);
+  }, [cookieToken]);
 
-    Swal.fire({
-      title: "Success!",
-      text: "You have Logged Out successfully.",
-      icon: "success",
-      confirmButtonText: "OK",
-    });
-    localStorage.removeItem("token");
-    setToken(null);
-    router.push("/login");
+  const handleLogout = () => {
+    removeToken();
+    window.location.href = "/login";
   };
 
   return (

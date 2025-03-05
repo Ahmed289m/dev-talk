@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken, setToken, removeToken } from "./cookies";
 
 export const axiosInstance = axios.create({
   baseURL: "https://dev-talk.azurewebsites.net/api",
@@ -10,7 +11,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -19,6 +20,7 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// Handle token refreshing on 401 error
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -34,11 +36,12 @@ axiosInstance.interceptors.response.use(
         );
 
         const { token } = response.data;
-        localStorage.setItem("token", token);
+        setToken(token);
         originalRequest.headers.Authorization = `Bearer ${token}`;
 
         return axiosInstance(originalRequest);
       } catch (error) {
+        removeToken();
         window.location.href = "/login";
         return Promise.reject(error);
       }
