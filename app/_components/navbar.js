@@ -1,9 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Search, Bell, LogOut } from "lucide-react";
-import { useDispatch } from "react-redux";
 
-import { useRouter } from "next/navigation";
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import { removeToken } from "../_lib/cookies";
