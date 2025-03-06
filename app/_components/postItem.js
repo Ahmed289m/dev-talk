@@ -1,3 +1,4 @@
+import { Delete, Edit, Edit2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../_components/avatar";
 import { Badge } from "../_components/badge";
 
@@ -11,9 +12,15 @@ export default function PostItem({ post }) {
           />
           <AvatarFallback>{post.username.charAt(0)}</AvatarFallback>
         </Avatar>
-        <div>
-          <p className="font-medium">{post.username}</p>
-          <p className="text-gray-500 text-sm">{post.postedAtAgo}</p>
+        <div className="flex justify-between w-full">
+          <div>
+            <p className="font-medium">{post.username}</p>
+            <p className="text-gray-500 text-sm">{post.postedAtAgo}</p>
+          </div>
+          <div className="flex gap-3">
+            <Edit2 className="text-green-500" />
+            <Delete className="text-green-500" />
+          </div>
         </div>
       </div>
 
