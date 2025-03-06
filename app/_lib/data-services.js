@@ -1,25 +1,14 @@
 import axios from "axios";
-import { axiosInstance } from "./axios-instance";
 
-export async function getPosts() {
+export async function getPosts({ pageParam = 0 }) {
   try {
     const response = await axios.get(
-      "https://dev-talk.azurewebsites.net/api/Post/all",
-      {}
+      `https://dev-talk.azurewebsites.net/api/Post/all?cursor=${pageParam}`
     );
-    return response.data?.result?.posts;
-  } catch (error) {
-    return error.response?.data?.errors;
-  }
-}
-
-export async function getFeed() {
-  try {
-    const response = await axiosInstance.get(
-      "https://dev-talk.azurewebsites.net/api/Post/feed",
-      {}
-    );
-    return response.data?.result?.posts;
+    return {
+      posts: response.data.result.posts,
+      id_cursor: response.data.result.id_cursor,
+    };
   } catch (error) {
     return error.response?.data?.errors;
   }

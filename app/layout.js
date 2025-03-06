@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./_components/navbar";
 
 import ReduxProvider from "./_components/redux-provider";
+import QueryProvider from "./_components/query-provider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
       <body className={roboto.variable}>
         <ReduxProvider>
           <Navbar />
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </ReduxProvider>
       </body>
     </html>
