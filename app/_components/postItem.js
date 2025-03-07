@@ -12,21 +12,20 @@ import { Badge } from "../_components/badge";
 
 export default function PostItem({ post }) {
   return (
-    <div className="border border-gray-100 rounded-lg p-6 hover:shadow-md transition-shadow">
+    <div className=" border border-gray-100 rounded-lg p-6 hover:shadow-md transition-shadow">
       <div className="flex items-start gap-3 mb-4">
         <Avatar>
-          <AvatarImage
-            src={`https://ui-avatars.com/api/?name=${post.username}`}
-          />
-          <AvatarFallback>{post.username.charAt(0)}</AvatarFallback>
+          <AvatarImage src={post.user.avatarUrl} />
+          <AvatarFallback>{post.user.userName.charAt(0)}</AvatarFallback>
         </Avatar>
         <div className="flex justify-between w-full">
           <div>
-            <p className="font-medium">{post.username}</p>
+            <p className="font-medium">{post.user.userName}</p>
             <p className="text-gray-500 text-sm">{post.postedAtAgo}</p>
           </div>
           <div className="flex gap-3">
             <Edit2 className="text-green-500" />
+
             <Delete className="text-green-500" />
           </div>
         </div>
@@ -34,7 +33,17 @@ export default function PostItem({ post }) {
 
       <h3 className="font-semibold text-xl mb-2">{post.title}</h3>
       <p className="text-gray-700 mb-4">{post.body}</p>
-
+      <div className="grid  gap-1 xl:grid-cols-2  overflow-hidden ">
+        {post.postMedias.map((media) => {
+          return (
+            <img
+              key={media.postMediaId}
+              src={media.mediaUrl}
+              className=" rounded-md w-full h-[280px]  object-fill lg:h-[400px]"
+            />
+          );
+        })}
+      </div>
       <div className="flex flex-wrap gap-2 mb-4">
         {post.tags?.map((tag, index) => (
           <Badge key={index} variant="outline" className="bg-gray-50">
