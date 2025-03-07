@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import { Search, Bell, LogOut } from "lucide-react";
+import { Search, Bell, LogOut, Moon } from "lucide-react";
 
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import { removeToken } from "../_lib/cookies";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
   const [{ token: cookieToken }] = useCookies(["token"]);
@@ -35,7 +36,6 @@ export default function Navbar() {
               className="pl-10 pr-4 py-2 rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 w-64"
             />
           </div>
-
           <Link
             href="/notifications"
             className="relative p-2 rounded-full hover:bg-gray-100"
@@ -43,7 +43,6 @@ export default function Navbar() {
             <Bell className="h-5 w-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full"></span>
           </Link>
-
           {token && (
             <LogOut className="cursor-pointer" onClick={handleLogout} />
           )}

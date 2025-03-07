@@ -1,4 +1,12 @@
-import { Delete, Edit, Edit2 } from "lucide-react";
+import {
+  Delete,
+  Edit,
+  Edit2,
+  MessageCircle,
+  ThumbsDown,
+  ThumbsUp,
+  Vote,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../_components/avatar";
 import { Badge } from "../_components/badge";
 
@@ -25,7 +33,7 @@ export default function PostItem({ post }) {
       </div>
 
       <h3 className="font-semibold text-xl mb-2">{post.title}</h3>
-      <p className="text-gray-700 mb-4">{post.content}</p>
+      <p className="text-gray-700 mb-4">{post.body}</p>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {post.tags?.map((tag, index) => (
@@ -37,10 +45,22 @@ export default function PostItem({ post }) {
 
       <div className="flex items-center text-gray-500 text-sm gap-4">
         <div className="flex items-center gap-1">
-          <span>{post.upVotes} upvotes</span>
+          <span className="flex gap-1 items-center">
+            <ThumbsUp className="w-4" />
+            <div>{post.upVotes} upvotes</div>
+          </span>
         </div>
         <div className="flex items-center gap-1">
-          <span>{post.commentsCount} comments</span>
+          <span className="flex gap-1 items-center">
+            <ThumbsDown className="w-4" />
+            <div>{post.downVotes} downvotes</div>
+          </span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span>
+            <MessageCircle className="w-4" />
+          </span>
+          <span>{post.comments} comments</span>
         </div>
       </div>
     </div>
