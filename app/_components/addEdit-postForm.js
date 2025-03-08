@@ -13,7 +13,7 @@ function AddEditPostForm({ categories }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="fixed overflow-y-auto w-full max-w-full mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div className=" overflow-y-auto w-full max-w-full mx-auto bg-white shadow-lg rounded-lg p-6">
       {/* User Info */}
       <div className="flex items-center gap-3 mb-4">
         <div className="w-10 h-10 bg-green-500 rounded-full flex-shrink-0"></div>
@@ -51,7 +51,7 @@ function AddEditPostForm({ categories }) {
                   <label
                     key={cat.categoryId}
                     className={`px-3 py-1 border border-gray-500 rounded-md cursor-pointer ${
-                      values.Categories.includes(cat.categoryName)
+                      values.Categories.includes(cat.categoryId)
                         ? "bg-green-500 text-white"
                         : "bg-gray-100"
                     }`}
@@ -59,16 +59,16 @@ function AddEditPostForm({ categories }) {
                     <Field
                       type="checkbox"
                       name="Categories"
-                      value={cat.categoryName}
+                      value={cat.categoryId}
                       className="hidden"
                       onChange={() => {
                         setFieldValue(
                           "Categories",
-                          values.Categories.includes(cat.categoryName)
+                          values.Categories.includes(cat.categoryId)
                             ? values.Categories.filter(
-                                (c) => c !== cat.categoryName
+                                (c) => c !== cat.categoryId
                               )
-                            : [...values.Categories, cat.categoryName]
+                            : [...values.Categories, cat.categoryId]
                         );
                       }}
                     />

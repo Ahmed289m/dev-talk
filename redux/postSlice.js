@@ -8,7 +8,7 @@ export const addPost = createAsyncThunk(
     formData.append("Title", Title);
     formData.append("Body", Body);
     formData.append("Files", Files);
-    console.log(Files);
+    formData.append("Categories", Categories);
     try {
       const response = await axiosInstance.post("Post/create", formData, {
         headers: {

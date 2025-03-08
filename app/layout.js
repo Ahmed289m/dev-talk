@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
       <body className={roboto.variable}>
         <ReduxProvider>
           <Navbar />
+
           <QueryProvider>
             <PostFormProvider>{children}</PostFormProvider>
           </QueryProvider>

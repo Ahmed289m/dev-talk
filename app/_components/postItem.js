@@ -22,6 +22,13 @@ export default function PostItem({ post }) {
           <div>
             <p className="font-medium">{post.user.userName}</p>
             <p className="text-gray-500 text-sm">{post.postedAtAgo}</p>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {post.categories?.map((tag, index) => (
+                <Badge key={index} className="bg-gray-50">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
           </div>
           <div className="flex gap-3">
             <Edit2 className="text-green-500" />
@@ -43,13 +50,6 @@ export default function PostItem({ post }) {
             />
           );
         })}
-      </div>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {post.tags?.map((tag, index) => (
-          <Badge key={index} variant="outline" className="bg-gray-50">
-            {tag}
-          </Badge>
-        ))}
       </div>
 
       <div className="flex items-center text-gray-500 text-sm gap-4">

@@ -28,17 +28,22 @@ export async function getCategories() {
   }
 }
 
-export async function getFeed({
+export async function getTrending({
   timeCursor = "",
-  scoreCursor = 0,
+  scoreCursor = 0.0,
   idCursor = "",
-  size = 5,
 }) {
   try {
-    const response = await axiosInstance.get(
-      `https://dev-talk.azurewebsites.net/api/Post/feed?timeCursor=${timeCursor}&scoreCursor=${scoreCursor}&idCursor=${idCursor}&size=${size}`
-    );
-    return response.data;
+    const response = await axiosInstance.get("Post/trending", {
+      timeCursor,
+      scoreCursor,
+      idCursor,
+    });
+    return {
+      timeCursor: response.data.result.timeCursor,
+      scoreCursor: response.data.result.scoreCursor,
+      idCursor: response.data.result.idCursor,
+    };
   } catch (error) {
     console.log("Error fetching feed:", error);
     return error.response?.data?.errors || "An unexpected error occurred";
