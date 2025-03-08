@@ -1,21 +1,14 @@
-"use client";
-import AddPostBtn from "../_components/addPostBtn";
-import MobilePostsNav from "../_components/mobilePostsNav";
-import PostList from "../_components/postList";
-import SideBarPosts from "../_components/sideBarPosts";
+import PostsPageComponent from "../_components/postsPageComponent";
+import { getCategories, getFeed } from "../_lib/data-services";
 
-export default function PostsPage() {
-  return (
-    <div className="min-h-screen bg-white relative flex">
-      <SideBarPosts />
-
-      <main className="flex-1 p-6">
-        <h1 className="text-2xl font-bold mb-6">Home</h1>
-        <PostList />
-      </main>
-
-      <AddPostBtn />
-      <MobilePostsNav />
-    </div>
-  );
+export default async function PostsPage() {
+  /*const feed = await getFeed({
+    timeCursor: "",
+    scoreCursor: 0,
+    idCursor: "",
+    size: 5,
+  });
+  console.log(feed);*/
+  const categories = await getCategories();
+  return <PostsPageComponent categories={categories} />;
 }

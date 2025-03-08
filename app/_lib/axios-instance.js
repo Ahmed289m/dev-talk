@@ -34,6 +34,7 @@ axiosInstance.interceptors.response.use(
           "https://dev-talk.azurewebsites.net/api/Auth/refreshToken",
           { withCredentials: true }
         );
+        console.log(response.data);
 
         const { token } = response.data;
         setToken(token);

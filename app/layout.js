@@ -5,6 +5,7 @@ import Navbar from "./_components/navbar";
 
 import ReduxProvider from "./_components/redux-provider";
 import QueryProvider from "./_components/query-provider";
+import PostFormProvider from "./_contexts/PostFormContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -19,11 +20,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={roboto.variable}>
         <ReduxProvider>
           <Navbar />
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <PostFormProvider>{children}</PostFormProvider>
+          </QueryProvider>
         </ReduxProvider>
       </body>
     </html>

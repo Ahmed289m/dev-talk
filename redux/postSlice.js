@@ -7,15 +7,19 @@ export const addPost = createAsyncThunk(
     const formData = new FormData();
     formData.append("Title", Title);
     formData.append("Body", Body);
+    formData.append("Files", Files);
+    console.log(Files);
     try {
       const response = await axiosInstance.post("Post/create", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log(response.data);
+
       return response.data;
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response.data);
       return rejectWithValue(error.response?.data?.errors);
     }
   }
