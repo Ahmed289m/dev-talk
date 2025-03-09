@@ -45,7 +45,7 @@ export async function getTrending({
       idCursor: response.data.result.idCursor,
     };
   } catch (error) {
-    console.log("Error fetching feed:", error);
+    console.log("Error fetching trending:", error);
     return error.response?.data?.errors || "An unexpected error occurred";
   }
 }
@@ -54,12 +54,11 @@ export async function getFeed() {
   try {
     const response = await axiosInstance.get("Post/feed");
     return {
-      timeCursor: response.data.result.timeCursor,
-      scoreCursor: response.data.result.scoreCursor,
-      idCursor: response.data.result.idCursor,
+      timeCursor: response.data.result.time_cursor,
+      scoreCursor: response.data.result.score_cursor,
+      idCursor: response.data.result.id_cursor,
     };
   } catch (error) {
-    console.log("Error fetching feed:", error);
     return error.response?.data?.errors || "An unexpected error occurred";
   }
 }

@@ -52,7 +52,7 @@ export default function PostItem({ post }) {
         })}
       </div>
 
-      <div className="flex items-center text-gray-500 text-sm gap-4">
+      <div className="flex items-center text-gray-500 text-sm gap-4 pt-5">
         <div className="flex items-center gap-1">
           <span className="flex gap-1 items-center">
             <ThumbsUp className="w-4" />

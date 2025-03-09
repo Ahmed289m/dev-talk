@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/app/_lib/axios-instance";
-import { setToken } from "@/app/_lib/cookies";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 // Async Thunks for Login
 export const login = createAsyncThunk(
@@ -17,7 +17,7 @@ export const login = createAsyncThunk(
       }
 
       const { token } = response.data.result;
-      setToken(token);
+      Cookies.set("token", token);
 
       return response.data.result;
     } catch (error) {

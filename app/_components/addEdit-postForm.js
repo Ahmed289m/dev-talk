@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { Image, X, Send } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addPost } from "@/redux/postSlice";
+import { redirect } from "next/dist/server/api-utils";
 
 const validationSchema = Yup.object({
   Title: Yup.string().required("Title is required"),
@@ -28,9 +29,9 @@ function AddEditPostForm({ categories }) {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           const { Title, Body, Files, Categories } = values;
-          console.log(values);
           dispatch(addPost({ Title, Body, Files, Categories }));
           resetForm();
+          redirect("/posts");
         }}
       >
         {({ setFieldValue, values }) => (

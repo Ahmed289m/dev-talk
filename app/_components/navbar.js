@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
-import { Search, Bell, LogOut, Moon } from "lucide-react";
+import { Search, Bell, LogOut } from "lucide-react";
 
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
-import { removeToken } from "../_lib/cookies";
-import { useTheme } from "next-themes";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
   const [{ token: cookieToken }] = useCookies(["token"]);
@@ -16,9 +15,7 @@ export default function Navbar() {
   }, [cookieToken]);
 
   const handleLogout = () => {
-    removeToken();
-    localStorage.removeItem("username");
-
+    Cookies.remove("token");
     window.location.href = "/login";
   };
 
