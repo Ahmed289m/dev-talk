@@ -12,7 +12,6 @@ const validationSchema = Yup.object({
 
 function AddEditPostForm({ categories }) {
   const dispatch = useDispatch();
-  const userName = localStorage.getItem("username");
 
   return (
     <div className=" overflow-y-auto w-full max-w-full mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -20,7 +19,7 @@ function AddEditPostForm({ categories }) {
       <div className="flex items-center gap-3 mb-4">
         <div className="w-10 h-10 bg-green-500 rounded-full flex-shrink-0"></div>
         <div>
-          <h3 className="font-semibold">{userName}</h3>
+          <h3 className="font-semibold">Ahmed</h3>
         </div>
       </div>
 
