@@ -49,3 +49,17 @@ export async function getTrending({
     return error.response?.data?.errors || "An unexpected error occurred";
   }
 }
+
+export async function getFeed() {
+  try {
+    const response = await axiosInstance.get("Post/feed");
+    return {
+      timeCursor: response.data.result.timeCursor,
+      scoreCursor: response.data.result.scoreCursor,
+      idCursor: response.data.result.idCursor,
+    };
+  } catch (error) {
+    console.log("Error fetching feed:", error);
+    return error.response?.data?.errors || "An unexpected error occurred";
+  }
+}

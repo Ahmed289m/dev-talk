@@ -1,7 +1,10 @@
 import AddEditPostForm from "@/app/_components/addEdit-postForm";
+import { getCategories } from "@/app/_lib/data-services";
 
-function AddPostPage() {
-  return <AddEditPostForm />;
+async function AddPostPage() {
+  const categories = await getCategories();
+
+  return <AddEditPostForm categories={categories} />;
 }
 
 export default AddPostPage;

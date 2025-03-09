@@ -17,6 +17,8 @@ export default function Navbar() {
 
   const handleLogout = () => {
     removeToken();
+    localStorage.removeItem("username");
+
     window.location.href = "/login";
   };
 

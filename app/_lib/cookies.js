@@ -4,7 +4,7 @@ export function setToken(token) {
   setCookie(null, "token", token, {
     path: "/",
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
   });
 }
 
