@@ -4,5 +4,5 @@ import { getFeed } from "../_lib/data-services";
 export default async function PostsPage() {
   const feed = await getFeed();
   console.log(feed);
-  return <PostsPageComponent />;
+  return <PostsPageComponent feed={feed} />;
 }

@@ -8,7 +8,6 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    await setTimeout(() => console.log("wating"), 5000);
     const token = Cookies.get("token");
     console.log("get token success", token);
     if (token) {
