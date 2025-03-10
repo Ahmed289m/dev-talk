@@ -5,6 +5,7 @@ import Navbar from "./_components/navbar";
 import ReduxProvider from "./_components/redux-provider";
 import QueryProvider from "./_components/query-provider";
 import PageWrapper from "./_components/page-wrapper";
+import { PostProvider } from "./_contexts/postContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -21,12 +22,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <ReduxProvider>
-          <Navbar />
-          <QueryProvider>
-            <PageWrapper>{children}</PageWrapper>
-          </QueryProvider>
-        </ReduxProvider>
+        <PostProvider>
+          <ReduxProvider>
+            <Navbar />
+            <QueryProvider>
+              <PageWrapper>{children}</PageWrapper>
+            </QueryProvider>
+          </ReduxProvider>
+        </PostProvider>
       </body>
     </html>
   );

@@ -20,7 +20,11 @@ export const login = createAsyncThunk(
       }
 
       const { token } = response.data.result;
-      setToken(token);
+
+      // Store token in localStorage instead of using useToken()
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", token);
+      }
 
       window.dispatchEvent(new Event("storage"));
       return response.data.result;

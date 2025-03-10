@@ -2,16 +2,15 @@
 import Link from "next/link";
 import { Search, Bell, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getToken, removeTokens } from "../_lib/axios-instance";
 
 export default function Navbar() {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setToken(getToken());
+    setToken(localStorage.getItem("token"));
 
     const handleStorageChange = () => {
-      setToken(getToken());
+      setToken(localStorage.getItem("token"));
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -19,7 +18,7 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    removeTokens();
+    localStorage.removeItem("token");
     setToken(null);
     window.location.href = "/login";
   };

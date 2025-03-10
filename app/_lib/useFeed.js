@@ -1,7 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAuth from "./hooks/useAuth";
 
-function useTrend() {
+function useFeed() {
+  const axiosInstance = useAuth();
+
   const { data, error, status, fetchNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["feeds"],
@@ -9,16 +11,13 @@ function useTrend() {
         pageParam = { timeCursor: "", scoreCursor: 0, idCursor: "" },
       }) => {
         try {
-          const response = await axios.get(
-            `https://dev-talk.azurewebsites.net/api/Post/trending`,
-            {
-              params: {
-                timeCursor: pageParam.timeCursor,
-                scoreCursor: pageParam.scoreCursor,
-                idCursor: pageParam.idCursor,
-              },
-            }
-          );
+          const response = await axiosInstance.get(`/Post/feed`, {
+            params: {
+              timeCursor: pageParam.timeCursor,
+              scoreCursor: pageParam.scoreCursor,
+              idCursor: pageParam.idCursor,
+            },
+          });
 
           return {
             timeCursor: response.data.result.time_cursor,
@@ -47,4 +46,4 @@ function useTrend() {
   return { data, error, status, fetchNextPage, isFetchingNextPage };
 }
 
-export default useTrend;
+export default useFeed;
