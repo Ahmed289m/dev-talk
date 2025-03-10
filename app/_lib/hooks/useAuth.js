@@ -4,10 +4,18 @@ import { useRefreshToken } from "./useRefreshToken";
 import { axiosInstance } from "../axios-instance";
 
 const useAuth = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("token"); // ✅ Access only on the client
+    }
+    return null;
+  });
+
   const refreshToken = useRefreshToken();
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // ✅ Prevent running on the server
+
     const requestIntercept = axiosInstance.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"] && token) {
