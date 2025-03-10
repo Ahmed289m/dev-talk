@@ -1,16 +1,22 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRefreshToken } from "./useRefreshToken";
 import { axiosInstance } from "../axios-instance";
 
 const useAuth = () => {
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(null);
   const refreshToken = useRefreshToken();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
 
   useEffect(() => {
     const requestIntercept = axiosInstance.interceptors.request.use(
       (config) => {
-        if (!config.headers["Authorization"]) {
+        if (!config.headers["Authorization"] && token) {
           config.headers["Authorization"] = `Bearer ${token}`;
         }
         return config;
@@ -25,7 +31,9 @@ const useAuth = () => {
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           prevRequest.sent = true;
           await refreshToken();
-          prevRequest.headers["Authorization"] = `Bearer ${token}`;
+          prevRequest.headers["Authorization"] = `Bearer ${localStorage.getItem(
+            "token"
+          )}`;
           return axiosInstance(prevRequest);
         }
         return Promise.reject(error);
