@@ -1,21 +1,26 @@
 "use client";
 import Link from "next/link";
 import { Search, Bell, LogOut } from "lucide-react";
-
-import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { getToken, removeTokens } from "../_lib/axios-instance";
 
 export default function Navbar() {
-  const [{ token: cookieToken }] = useCookies(["token"]);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setToken(cookieToken);
-  }, [cookieToken]);
+    setToken(getToken());
+
+    const handleStorageChange = () => {
+      setToken(getToken());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const handleLogout = () => {
-    Cookies.remove("token");
+    removeTokens();
+    setToken(null);
     window.location.href = "/login";
   };
 

@@ -1,5 +1,21 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+
+export const getToken = () => {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem("token");
+};
+
+export const setToken = (token) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("token", token);
+  }
+};
+
+export const removeTokens = () => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("token");
+  }
+};
 
 export const axiosInstance = axios.create({
   baseURL: "https://dev-talk.azurewebsites.net/api",
@@ -8,11 +24,13 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = Cookies.get("token");
-    console.log("get token success", token);
+    const token = getToken();
+
+    console.log("Interceptor - Token Retrieved:", token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error)
@@ -25,7 +43,11 @@ axiosInstance.interceptors.response.use(
     console.log("start with refresh token", error);
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (
+      typeof window !== "undefined" &&
+      error.response?.status === 401 &&
+      !originalRequest._retry
+    ) {
       console.log("start with refresh token cond. on status");
 
       originalRequest._retry = true;
@@ -37,7 +59,7 @@ axiosInstance.interceptors.response.use(
         );
         console.log("token refreshed", response);
         const { token } = response.data;
-        Cookies.set("token", token);
+        setToken(token);
         originalRequest.headers.Authorization = `Bearer ${token}`;
 
         return axiosInstance(originalRequest);

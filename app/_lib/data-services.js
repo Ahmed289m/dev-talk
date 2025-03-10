@@ -59,6 +59,6 @@ export async function getFeed() {
       idCursor: response.data.result.id_cursor,
     };
   } catch (error) {
-    return error.response?.data?.errors || "An unexpected error occurred";
+    return error.response?.data?.errors;
   }
 }

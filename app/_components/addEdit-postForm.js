@@ -1,10 +1,11 @@
 "use client";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Image, X, Send } from "lucide-react";
+import { Image, X, Send, ArrowLeft } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addPost } from "@/redux/postSlice";
 import { redirect } from "next/dist/server/api-utils";
+import Link from "next/link";
 
 const validationSchema = Yup.object({
   Title: Yup.string().required("Title is required"),
@@ -18,6 +19,9 @@ function AddEditPostForm({ categories }) {
     <div className=" overflow-y-auto w-full max-w-full mx-auto bg-white shadow-lg rounded-lg p-6">
       {/* User Info */}
       <div className="flex items-center gap-3 mb-4">
+        <Link href="/posts">
+          <ArrowLeft />
+        </Link>
         <div className="w-10 h-10 bg-green-500 rounded-full flex-shrink-0"></div>
         <div>
           <h3 className="font-semibold">Ahmed</h3>

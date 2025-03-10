@@ -1,24 +1,28 @@
-import { axiosInstance } from "@/app/_lib/axios-instance";
+import { setToken } from "@/app/_lib/axios-instance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
+import axios from "axios";
 
 // Async Thunks for Login
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post(`Auth/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `https://dev-talk.azurewebsites.net/api/Auth/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       if (!response.data || !response.data.result) {
         throw new Error("Invalid response from server");
       }
 
       const { token } = response.data.result;
-      Cookies.set("token", token);
+      setToken(token);
 
+      window.dispatchEvent(new Event("storage"));
       return response.data.result;
     } catch (error) {
       console.error("Login error:", error.response?.data || error);
@@ -37,13 +41,16 @@ export const register = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axiosInstance.post("/Auth/register", {
-        firstName,
-        lastName,
-        userName,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://dev-talk.azurewebsites.net/api/Auth/register",
+        {
+          firstName,
+          lastName,
+          userName,
+          email,
+          password,
+        }
+      );
       return response.data.result;
     } catch (error) {
       return rejectWithValue(
