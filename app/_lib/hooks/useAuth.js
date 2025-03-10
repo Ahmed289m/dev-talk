@@ -4,14 +4,8 @@ import { useRefreshToken } from "./useRefreshToken";
 import { axiosInstance } from "../axios-instance";
 
 const useAuth = () => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const refreshToken = useRefreshToken();
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setToken(localStorage.getItem("token"));
-    }
-  }, []);
 
   useEffect(() => {
     const requestIntercept = axiosInstance.interceptors.request.use(
