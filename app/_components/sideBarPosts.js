@@ -1,3 +1,5 @@
+"use client";
+
 import { Home, Newspaper, TrendingUp } from "lucide-react";
 import { usePostContext } from "../_contexts/postContext";
 
