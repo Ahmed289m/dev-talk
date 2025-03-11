@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.variable}>
-        <ThemeProvider>
+        <ThemeProvider defaultTheme="dark">
           <PostProvider>
             <ReduxProvider>
               <Navbar />

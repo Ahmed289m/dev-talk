@@ -16,7 +16,7 @@ function AddEditPostForm({ categories }) {
   const dispatch = useDispatch();
 
   return (
-    <div className=" overflow-y-auto w-full max-w-full mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div className=" add-post overflow-y-auto w-full max-w-full mx-auto  shadow-lg rounded-lg p-6">
       {/* User Info */}
       <div className="flex items-center gap-3 mb-4">
         <Link href="/posts">
@@ -57,9 +57,8 @@ function AddEditPostForm({ categories }) {
                   <label
                     key={cat.categoryId}
                     className={`px-3 py-1 border border-gray-500 rounded-md cursor-pointer ${
-                      values.Categories.includes(cat.categoryId)
-                        ? "bg-green-500 text-white"
-                        : "bg-gray-100"
+                      values.Categories.includes(cat.categoryId) &&
+                      "bg-green-500 text-white"
                     }`}
                   >
                     <Field

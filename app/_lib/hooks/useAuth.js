@@ -14,7 +14,7 @@ const useAuth = () => {
   const refreshToken = useRefreshToken();
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // ✅ Prevent running on the server
+    if (typeof window === "undefined") return;
 
     const requestIntercept = axiosInstance.interceptors.request.use(
       (config) => {

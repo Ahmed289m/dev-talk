@@ -39,14 +39,23 @@
 
 /* Apply styles on dark */
 body[data-theme="dark"] {
-  background-color: var(--background);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
 }
 
+[data-theme="dark"] .add-post {
+  background-color: var(--background);
+}
 [data-theme="dark"] .votes {
   color: var(--color);
 }
+
+[data-theme="dark"] .add-post-btn {
+  background-color: white;
+  color: var(--primary);
+}
+
 [data-theme="dark"] .posts {
   background: var(--background);
   font-family: var(--font-body);

@@ -1,8 +1,10 @@
 "use client";
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export const useRefreshToken = () => {
+  const router = useRouter();
   const refreshToken = async () => {
     try {
       const res = await axios.get(
@@ -12,20 +14,12 @@ export const useRefreshToken = () => {
         }
       );
 
-      if (res.status === 200) {
-        const newToken = res.data.token;
-        localStorage.setItem("token", newToken);
-        return newToken;
-      } else {
-        throw new Error("Failed to refresh token");
-      }
+      console.log("token trefreshesd");
+      const newToken = res.data.token;
+      localStorage.setItem("token", newToken);
+      return newToken;
     } catch (error) {
-      console.error(
-        "Refresh Token Error:",
-        error.response?.status,
-        error.message
-      );
-      return null;
+      console.error("Refresh Token Error:", error);
     }
   };
 
