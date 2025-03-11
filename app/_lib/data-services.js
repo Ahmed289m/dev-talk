@@ -14,8 +14,6 @@ export async function getPosts({ pageParam = 0 }) {
   }
 }
 
-//https://dev-talk.azurewebsites.net/api/Category/all
-
 export async function getCategories() {
   try {
     const response = await axios.get(

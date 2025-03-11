@@ -33,7 +33,7 @@ export function LoadingScreen() {
   }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white/40 backdrop-blur-md z-50">
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md z-50">
       <div className="relative">
         <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-br from-green-300/20 to-gray-200/20 backdrop-blur-2xl p-6 border border-gray-300/50 shadow-[0_0_100px_rgba(0,0,0,0.1)] flex items-center justify-center">
           <div

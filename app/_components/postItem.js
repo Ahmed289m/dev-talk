@@ -42,17 +42,18 @@ export default function PostItem({ post }) {
       </div>
 
       <h3 className="font-semibold text-xl mb-2">{post.title}</h3>
-      <p className=" mb-4">{post.body}</p>
-      <div className="grid  gap-1 xl:grid-cols-2  overflow-hidden ">
-        {post.postMedias.map((media) => {
-          return (
-            <img
-              key={media.postMediaId}
-              src={media.mediaUrl}
-              className=" rounded-md w-full h-[280px]  object-fill lg:h-[400px]"
-            />
-          );
-        })}
+      <p className="mb-4">{post.body}</p>
+
+      {/* ✅ Responsive Image Grid */}
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {post.postMedias.map((media) => (
+          <img
+            key={media.postMediaId}
+            src={media.mediaUrl}
+            className="w-full h-auto max-h-[300px] sm:max-h-[400px] rounded-md object-cover"
+            alt="Post media"
+          />
+        ))}
       </div>
 
       <div className="votes flex items-center text-gray-500 text-sm gap-4 pt-5">
