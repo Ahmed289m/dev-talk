@@ -13,7 +13,7 @@ function SideBarPosts() {
   const { activeTab, setActiveTab } = usePostContext();
 
   return (
-    <aside className="hidden md:block w-64 border-r border-gray-100 min-h-[calc(100vh-64px)] p-4 sticky top-16">
+    <aside className="sidebar hidden md:block w-64 border-r  min-h-[calc(100vh-64px)] p-4 sticky top-16">
       <nav>
         <ul className="space-y-2">
           {navigationItems.map((item) => (
@@ -21,9 +21,7 @@ function SideBarPosts() {
               <button
                 onClick={() => setActiveTab(item.id)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                  activeTab === item.id
-                    ? "bg-green-50 text-green-700"
-                    : "hover:bg-gray-50"
+                  activeTab === item.id && "bg-white text-green-500"
                 }`}
               >
                 {item.icon}

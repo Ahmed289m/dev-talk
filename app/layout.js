@@ -6,6 +6,7 @@ import ReduxProvider from "./_components/redux-provider";
 import QueryProvider from "./_components/query-provider";
 import PageWrapper from "./_components/page-wrapper";
 import { PostProvider } from "./_contexts/postContext";
+import { ThemeProvider } from "next-themes";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,16 +21,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={roboto.variable}>
-        <PostProvider>
-          <ReduxProvider>
-            <Navbar />
-            <QueryProvider>
-              <PageWrapper>{children}</PageWrapper>
-            </QueryProvider>
-          </ReduxProvider>
-        </PostProvider>
+        <ThemeProvider>
+          <PostProvider>
+            <ReduxProvider>
+              <Navbar />
+              <QueryProvider>
+                <PageWrapper>{children}</PageWrapper>
+              </QueryProvider>
+            </ReduxProvider>
+          </PostProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

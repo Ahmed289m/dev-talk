@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
-import { Search, Bell, LogOut } from "lucide-react";
+import { Search, Bell, LogOut, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
   const [token, setToken] = useState(null);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -24,30 +26,45 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white">
+    <header className="navbar sticky top-0 z-50 w-full">
       <div className="flex h-16 items-center px-4 md:px-6">
         <Link href="/posts">
-          <img src="/DevLight.png" width={200} />
+          <img
+            src={theme === "light" ? `/DevLight.png` : `/DevDark.png`}
+            width={200}
+          />
         </Link>
 
-        <div className="ml-auto flex items-center gap-4">
-          <div className="relative hidden md:flex items-center">
-            <Search className="absolute left-3 h-4 w-4 text-gray-400" />
-            <input
-              type="search"
-              placeholder="Search"
-              className="pl-10 pr-4 py-2 rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 w-64"
-            />
-          </div>
+        <div className="ml-auto flex items-center gap-4 ">
+          {theme === "light" ? (
+            <div className="p-2 rounded-md bg-green-900/10 ">
+              <Moon
+                className="transition-all duration-500"
+                onClick={() => setTheme("dark")}
+              />
+            </div>
+          ) : (
+            <div className="p-2 rounded-md bg-green-900/10 ">
+              <Sun
+                className="transition-all duration-500"
+                onClick={() => setTheme("light")}
+              />
+            </div>
+          )}
           <Link
             href="/notifications"
-            className="relative p-2 rounded-full hover:bg-gray-100"
+            className="relative p-2 rounded-md bg-green-900/10   "
           >
             <Bell className="h-5 w-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full"></span>
           </Link>
           {token && (
-            <LogOut className="cursor-pointer" onClick={handleLogout} />
+            <div className="p-2 rounded-md bg-green-900/10 ">
+              <LogOut
+                className="cursor-pointer h-5 w-5 "
+                onClick={handleLogout}
+              />
+            </div>
           )}
         </div>
       </div>

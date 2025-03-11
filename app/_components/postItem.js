@@ -12,7 +12,7 @@ import { Badge } from "../_components/badge";
 
 export default function PostItem({ post }) {
   return (
-    <div className=" border border-gray-100 rounded-lg p-6 hover:shadow-md transition-shadow">
+    <div className="post-item border rounded-lg p-6 hover:shadow-md transition-shadow">
       <div className="flex items-start gap-3 mb-4">
         <Avatar>
           <AvatarImage src={post.user.avatarUrl} />
@@ -31,15 +31,18 @@ export default function PostItem({ post }) {
             </div>
           </div>
           <div className="flex gap-3">
-            <Edit2 className="text-green-500" />
-
-            <Delete className="text-green-500" />
+            <div>
+              <Edit2 />
+            </div>
+            <div>
+              <Delete />
+            </div>
           </div>
         </div>
       </div>
 
       <h3 className="font-semibold text-xl mb-2">{post.title}</h3>
-      <p className="text-gray-700 mb-4">{post.body}</p>
+      <p className=" mb-4">{post.body}</p>
       <div className="grid  gap-1 xl:grid-cols-2  overflow-hidden ">
         {post.postMedias.map((media) => {
           return (

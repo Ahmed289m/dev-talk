@@ -5,7 +5,7 @@ import PostList from "../_components/postList";
 import SideBarPosts from "../_components/sideBarPosts";
 function PostsPageComponent() {
   return (
-    <div className="min-h-screen bg-white relative flex">
+    <div className="min-h-screen relative posts flex">
       <SideBarPosts />
 
       <main className="flex-1 p-6">
