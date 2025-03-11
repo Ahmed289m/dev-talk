@@ -43,6 +43,10 @@ body[data-theme="dark"] {
   color: var(--foreground);
   font-family: var(--font-body);
 }
+
+[data-theme="dark"] .votes {
+  color: var(--color);
+}
 [data-theme="dark"] .posts {
   background: var(--background);
   font-family: var(--font-body);
