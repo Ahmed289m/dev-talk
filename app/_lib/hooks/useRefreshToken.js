@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import { redirect } from "next/dist/server/api-utils";
 
 export const useRefreshToken = () => {
   const refreshToken = async () => {
@@ -18,7 +17,6 @@ export const useRefreshToken = () => {
         localStorage.setItem("token", newToken);
         return newToken;
       } else {
-        redirect("/login");
         throw new Error("Failed to refresh token");
       }
     } catch (error) {

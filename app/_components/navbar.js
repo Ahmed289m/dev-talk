@@ -26,7 +26,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="navbar sticky top-0 z-50 w-full">
+    <header className="navbar backdrop-blur-md bg-transparent sticky top-0 z-50 w-full">
       <div className="flex h-16 items-center px-4 md:px-6">
         <Link href="/posts">
           <img

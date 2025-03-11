@@ -1,9 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Your default theme */
   --background: white;
   --foreground: black;
+
+  --border: #f3f4f6;
+
+  .mobile-nav {
+    background-color: #22c55e;
+    color: #e5e7eb;
+  }
+
   transition: all 0.3s ease-in-out;
 }
 
@@ -30,7 +37,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* Apply styles */
+/* Apply styles on dark */
 body[data-theme="dark"] {
   background: var(--background);
   color: var(--foreground);
@@ -38,7 +45,6 @@ body[data-theme="dark"] {
 }
 [data-theme="dark"] .posts {
   background: var(--background);
-  background-attachment: fixed;
   font-family: var(--font-body);
   color: var(--color);
 }
@@ -52,16 +58,16 @@ body[data-theme="dark"] {
   border: var(--border);
 }
 
+[data-theme="dark"] .navbar {
+  background: var(--background);
+}
+
 [data-theme="dark"] .sidebar {
   color: var(--foreground);
   font-family: var(--font-body);
   border: none;
 }
 
-/* Glassmorphism Card Effect */
-[data-theme="dark"] .navbar {
-  background-color: var(--background);
-}
 [data-theme="dark"] .mobile-nav {
   background: linear-gradient(300deg, #0f2a1f, #0a0f14);
   color: var(--color);

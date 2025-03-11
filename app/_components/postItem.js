@@ -12,7 +12,7 @@ import { Badge } from "../_components/badge";
 
 export default function PostItem({ post }) {
   return (
-    <div className="post-item border rounded-lg p-6 hover:shadow-md transition-shadow">
+    <div className="post-item border rounded-lg p-6 hover:shadow-md transition-shadow border-gray-100">
       <div className="flex items-start gap-3 mb-4">
         <Avatar>
           <AvatarImage src={post.user.avatarUrl} />
