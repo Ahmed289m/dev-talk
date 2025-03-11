@@ -43,6 +43,19 @@ body[data-theme="dark"] {
   color: var(--foreground);
   font-family: var(--font-body);
 }
+[data-theme="dark"] .login {
+  background-color: var(--background);
+}
+[data-theme="dark"] .login input {
+  background-color: var(--background);
+}
+[data-theme="dark"] .signup input {
+  background-color: var(--background);
+}
+
+[data-theme="dark"] .signup {
+  background-color: var(--background);
+}
 
 [data-theme="dark"] .add-post {
   background-color: var(--background);

@@ -19,6 +19,10 @@ export const useRefreshToken = () => {
       localStorage.setItem("token", newToken);
       return newToken;
     } catch (error) {
+      router.push("login");
+      localStorage.removeItem("token");
+      window.dispatchEvent(new Event("storage"));
+
       console.error("Refresh Token Error:", error);
     }
   };

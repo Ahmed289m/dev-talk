@@ -1,9 +1,10 @@
-import { axiosInstance } from "@/app/_lib/axios-instance";
+import useAuth from "@/app/_lib/hooks/useAuth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const addPost = createAsyncThunk(
   "post/add",
   async ({ Title, Body, Files, Categories }, { rejectWithValue }) => {
+    const axiosInstance = useAuth();
     const formData = new FormData();
     formData.append("Title", Title);
     formData.append("Body", Body);

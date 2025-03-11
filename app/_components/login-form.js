@@ -57,7 +57,7 @@ function LoginForm() {
               type="email"
               name="email"
               placeholder="Email"
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-3 border bg-gray-50 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <ErrorMessage
               name="email"
@@ -74,7 +74,7 @@ function LoginForm() {
               type="password"
               name="password"
               placeholder="Password"
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-3 border bg-gray-50 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <ErrorMessage
               name="password"
@@ -88,7 +88,7 @@ function LoginForm() {
               <Field
                 type="checkbox"
                 name="remember"
-                className="h-4 w-4 text-green-500 border-gray-300 rounded"
+                className="h-4 w-4 text-green-500 bg-gray-50 border-gray-300 rounded"
               />
               <label htmlFor="remember" className="ml-2 text-gray-700">
                 Remember me
